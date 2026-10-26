@@ -7,7 +7,7 @@
 Parameter · Turki Hufais</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#000;--card:#111114;--line:#1f1f24;--text:#e8e8ec;--muted:#9a9aa3;--accent:#ff2e63;--green:#9fef00}
+  :root{--bg:#000;--card:#111114;--line:#1f1f24;--text:#e8e8ec;--muted:#9a9aa3;--accent:#a855f7;--green:#22d3ee}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font-family:Poppins,system-ui,sans-serif;line-height:1.75;font-size:16px}
   .top{position:sticky;top:0;background:#000e;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
@@ -30,13 +30,14 @@ Parameter · Turki Hufais</title>
   table{border-collapse:collapse;width:100%;margin:18px 0;font-size:.92rem}
   th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
   th{background:var(--card);color:#fff}
-  blockquote{margin:18px 0;padding:10px 18px;border-left:3px solid var(--accent);background:#ff2e630d;color:#ddd}
+  blockquote{margin:18px 0;padding:10px 18px;border-left:3px solid var(--accent);background:#a855f70d;color:#ddd}
   hr{border:0;border-top:1px solid var(--line);margin:40px 0}
   img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
   footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px;border-top:1px solid var(--line)}
   /* pandoc syntax highlighting */
+  html { -webkit-text-size-adjust: 100%; }
   pre > code.sourceCode { white-space: pre; position: relative; }
-  pre > code.sourceCode > span { line-height: 1.25; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
   pre > code.sourceCode > span:empty { height: 1.2em; }
   .sourceCode { overflow: visible; }
   code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -229,21 +230,21 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="
 <h3 id="results">Results</h3>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Request</th>
 <th style="text-align: right;">Observed response time</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Baseline</td>
 <td style="text-align: right;">0.116s</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SLEEP(5)</code></td>
 <td style="text-align: right;">5.113s</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>SLEEP(3)</code></td>
 <td style="text-align: right;">3.095s</td>
 </tr>

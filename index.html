@@ -10,7 +10,7 @@
 <style>
   :root{
     --bg:#000; --bg2:#0a0a0c; --card:#111114; --line:#1f1f24;
-    --text:#f2f2f2; --muted:#9a9aa3; --accent:#ff2e63; --green:#9fef00;
+    --text:#f2f2f2; --muted:#9a9aa3; --accent:#a855f7; --green:#22d3ee;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -44,7 +44,7 @@
   /* HERO */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
   .hero::before{content:"";position:absolute;right:-10%;top:10%;width:60vw;height:60vw;max-width:780px;max-height:780px;
-    background:radial-gradient(circle,#ff2e6326 0%,#ff2e630a 40%,#0000 70%);pointer-events:none}
+    background:radial-gradient(circle,#a855f726 0%,#a855f70a 40%,#0000 70%);pointer-events:none}
   .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
     background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
     background-size:48px 48px;mask-image:radial-gradient(ellipse at 75% 45%,#000 0%,#0000 65%);-webkit-mask-image:radial-gradient(ellipse at 75% 45%,#000 0%,#0000 65%)}
@@ -74,13 +74,13 @@
   .card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
   .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
   .tag{font-size:.72rem;padding:3px 9px;border-radius:4px;background:#1a1a1f;color:#ccc;font-family:"JetBrains Mono",monospace}
-  .tag.lock{background:#ff2e6322;color:var(--accent)}
-  .tag.open{background:#9fef0018;color:var(--green)}
+  .tag.lock{background:#a855f722;color:var(--accent)}
+  .tag.open{background:#22d3ee18;color:var(--green)}
   .shot{aspect-ratio:16/9;border-radius:6px;margin:-4px 0 16px;background:#16161a center/cover no-repeat;border:1px solid var(--line)}
 
   .chips{display:flex;flex-wrap:wrap;gap:10px}
   .chip{border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:6px;font-size:.84rem}
-  .chip.cert{border-color:#ff2e6355;color:#fff}
+  .chip.cert{border-color:#a855f755;color:#fff}
   .chip.cert::before{content:"✔ ";color:var(--accent)}
 
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}

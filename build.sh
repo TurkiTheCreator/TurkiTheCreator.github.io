@@ -23,7 +23,7 @@ if [ -n "$PASS" ]; then
   mkdir -p .enc
   staticrypt "$TMP" -p "$PASS" --short -d .enc \
     --template-title "$TITLE" \
-    --template-color-primary "#ff2e63" --template-color-secondary "#000000"
+    --template-color-primary "#a855f7" --template-color-secondary "#000000"
   mv ".enc/$TMP" "$OUT"
   rmdir .enc
 else
