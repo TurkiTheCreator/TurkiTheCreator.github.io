@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turki Hufais · Cybersecurity</title>
+<meta name="description" content="Turki Hufais (0xgyro) - cybersecurity student, junior pentester and Python developer. Projects, write-ups and research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000; --bg2:#0a0a0c; --card:#111114; --line:#1f1f24;
+    --text:#f2f2f2; --muted:#9a9aa3; --accent:#ff2e63; --green:#9fef00;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Poppins,system-ui,sans-serif;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  [hidden]{display:none!important}
+  .hero>.wrap{width:100%}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  /* NAV */
+  header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s}
+  header.solid{background:#000e;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{font-size:1.5rem;font-weight:600}
+  .logo span{color:var(--accent)}
+  .links{display:flex;gap:38px;font-size:.92rem;font-weight:500}
+  .links a{position:relative;transition:color .2s}
+  .links a:hover,.links a.active{color:var(--accent)}
+  .links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .25s}
+  .links a:hover::after,.links a.active::after{width:100%}
+  .burger{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+  .btn{display:inline-block;background:#fff;color:#000;font-weight:600;font-size:.92rem;padding:10px 22px;border-radius:6px;border:1px solid #fff;transition:.2s;cursor:pointer;font-family:inherit}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.dark{background:#111;color:#fff;border-color:#2a2a30}
+  .btn.dark:hover{background:var(--accent);border-color:var(--accent)}
+  .btn.sm{padding:6px 14px;font-size:.8rem}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-10%;top:10%;width:60vw;height:60vw;max-width:780px;max-height:780px;
+    background:radial-gradient(circle,#ff2e6326 0%,#ff2e630a 40%,#0000 70%);pointer-events:none}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:48px 48px;mask-image:radial-gradient(ellipse at 75% 45%,#000 0%,#0000 65%);-webkit-mask-image:radial-gradient(ellipse at 75% 45%,#000 0%,#0000 65%)}
+  .hero-text{position:relative;z-index:2;max-width:590px;padding-top:40px}
+  .handle{color:var(--green);font-size:.88rem;margin-bottom:14px}
+  .hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;line-height:1.12}
+  .hero h1 span{color:var(--accent)}
+  .headline{margin-top:14px;font-weight:600;color:#fff;font-size:1.02rem}
+  .headline b{color:var(--accent);font-weight:600}
+  .hero p.intro{margin:14px 0 30px;font-size:.96rem;color:#d0d0d6}
+  .actions{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* SECTIONS */
+  section{padding:100px 0}
+  section.alt{background:var(--bg2)}
+  .title{font-size:2rem;font-weight:700;margin-bottom:8px}
+  .title span{color:var(--accent)}
+  .sub{color:var(--muted);margin-bottom:42px;max-width:640px}
+  .h3{font-size:1.15rem;font-weight:600;margin:46px 0 18px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;transition:.25s;display:flex;flex-direction:column}
+  .card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .card h3{font-size:1.08rem;margin-bottom:4px}
+  .card .meta{font-size:.78rem;color:var(--muted)}
+  .card p{color:#bbb;font-size:.9rem;margin-top:10px;flex:1}
+  .card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .tag{font-size:.72rem;padding:3px 9px;border-radius:4px;background:#1a1a1f;color:#ccc;font-family:"JetBrains Mono",monospace}
+  .tag.lock{background:#ff2e6322;color:var(--accent)}
+  .tag.open{background:#9fef0018;color:var(--green)}
+  .shot{aspect-ratio:16/9;border-radius:6px;margin:-4px 0 16px;background:#16161a center/cover no-repeat;border:1px solid var(--line)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:6px;font-size:.84rem}
+  .chip.cert{border-color:#ff2e6355;color:#fff}
+  .chip.cert::before{content:"✔ ";color:var(--accent)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  #htb-badge{margin-top:12px;max-width:100%}
+
+  /* PROJECT MODAL */
+  dialog{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:12px;max-width:760px;width:calc(100% - 32px);padding:0;margin:auto}
+  dialog::backdrop{background:#000c}
+  .modal{padding:30px;max-height:85vh;overflow:auto}
+  .modal h2{font-size:1.5rem}
+  .modal h4{color:var(--accent);font-size:.9rem;margin:22px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+  .modal p,.modal li{color:#ccc;font-size:.93rem}
+  .modal ul{padding-left:18px}
+  .modal .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:8px}
+  .modal .gallery img{border-radius:6px;border:1px solid var(--line)}
+  .close{float:right;background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
+
+  /* WRITEUPS */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+  .filters button{background:var(--card);border:1px solid var(--line);color:#ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font:500 .84rem Poppins}
+  .filters button.on,.filters button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:50px}
+  .about-grid p{color:#ccc;margin-bottom:14px}
+  .timeline{border-left:2px solid var(--line);padding-left:20px}
+  .tl{position:relative;margin-bottom:24px}
+  .tl::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+  .tl .when{font-size:.78rem;color:var(--muted)}
+  .tl h4{font-size:.98rem}
+  .tl p{font-size:.88rem;color:#bbb;margin:4px 0 0}
+  .skillset{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .skillset ul{list-style:none;margin-top:8px}
+  .skillset li{font-size:.88rem;color:#ccc;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .skillset li::before{content:"▸ ";color:var(--accent)}
+
+  /* CONTACT */
+  .contact-grid{max-width:620px}
+  .contact-links a{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);transition:color .2s}
+  .contact-links a:hover{color:var(--accent)}
+  .contact-links span{color:var(--muted);font-size:.85rem}
+  form{display:grid;gap:12px}
+  input,textarea{background:var(--card);border:1px solid var(--line);color:#fff;padding:12px 14px;border-radius:6px;font:inherit;font-size:.9rem}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:130px;resize:vertical}
+  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--muted);font-size:.82rem}
+
+  @media (max-width:860px){
+    .links{display:none}
+    .burger{display:block}
+    nav.open .links{display:flex;flex-direction:column;gap:22px;position:absolute;top:76px;left:0;right:0;background:#000;padding:24px;border-bottom:1px solid var(--line)}
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    section{padding:76px 0}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <nav class="wrap" id="nav">
+    <a href="#home" class="logo">Turki<span>.</span></a>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#writeups">Write-ups</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="burger" aria-label="Menu" onclick="nav.classList.toggle('open')">☰</button>
+  </nav>
+</header>
+
+<!-- ================= 1. HOME ================= -->
+<div class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="handle mono">$ whoami → 0xgyro</div>
+      <h1>Hello,<br>I'm <span>Turki Hufais</span></h1>
+      <div class="headline">Cybersecurity Student <b>|</b> Red Teaming <b>|</b> Python Development</div>
+      <p class="intro">Computer Science student specializing in Cybersecurity &amp; Networks. I build security tools, attack and defend lab environments, and write up how I solve every box.</p>
+      <div class="actions">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="assets/Turki_Hufais_CV.pdf" class="btn dark" id="cv-btn" download hidden>Download CV</a>
+        <a href="#contact" class="btn dark">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="alt" id="highlights">
+  <div class="wrap">
+    <h2 class="title">Featured <span>Projects</span></h2>
+    <p class="sub">A quick look at what I've built. Full details in Projects.</p>
+    <div class="grid" id="featured"></div>
+
+    <h3 class="h3">Key Skills &amp; Certifications</h3>
+    <div class="chips">
+      <span class="chip cert">eJPT</span>
+      <span class="chip cert">CVE-2026-107803</span>
+      <span class="chip">Network Penetration Testing</span><span class="chip">Active Directory Attacks</span>
+      <span class="chip">Web App Testing</span><span class="chip">SIEM / Wazuh</span>
+      <span class="chip">Python Tooling</span><span class="chip">Linux</span><span class="chip">Networking (Cisco)</span>
+    </div>
+
+    <h3 class="h3">Platforms</h3>
+    <div class="stats">
+      <a class="card" id="htb-card" href="https://app.hackthebox.com/" target="_blank" rel="noopener">
+        <h3>Hack The Box</h3><div class="meta mono">0xgyro · ranked in Saudi Arabia</div>
+        <div id="htb-live" class="tags"></div>
+        <!-- Fallback: official HTB badge (replace YOUR_HTB_ID) -->
+        <img id="htb-badge" src="https://www.hackthebox.com/badge/image/YOUR_HTB_ID" alt="Hack The Box badge" onerror="this.remove()">
+      </a>
+      <a class="card" href="https://tryhackme.com/p/GYro" target="_blank" rel="noopener"><h3>TryHackMe</h3><div class="meta mono">GYro</div></a>
+      <a class="card" href="https://hackerone.com/txu7t" target="_blank" rel="noopener"><h3>HackerOne</h3><div class="meta mono">txu7t</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <h2 class="title">My <span>Projects</span></h2>
+    <p class="sub">Each project includes the architecture, technologies, results and what I learned. Click "Details".</p>
+    <div class="grid" id="pgrid"></div>
+  </div>
+</section>
+
+<dialog id="pmodal"><div class="modal" id="pbody"></div></dialog>
+
+<!-- ================= 3. WRITE-UPS & RESEARCH ================= -->
+<section class="alt" id="writeups">
+  <div class="wrap">
+    <h2 class="title">Write-ups <span>&amp; Research</span></h2>
+    <p class="sub">How I think through problems: evidence, explanation and remediation.</p>
+    <div class="filters" id="filters">
+      <button class="on" data-f="all">All</button>
+      <button data-f="CTF">CTF Walkthroughs</button>
+      <button data-f="Research">Vuln Research</button>
+      <button data-f="Tutorial">Tutorials</button>
+      <button data-f="Lab">Experiments</button>
+      <button data-f="active">🔒 Active</button>
+    </div>
+    <div class="grid" id="wgrid"></div>
+  </div>
+</section>
+
+<!-- ================= 4. ABOUT & SKILLS ================= -->
+<section id="about">
+  <div class="wrap">
+    <h2 class="title">About <span>&amp; Skills</span></h2>
+    <p class="sub">Education, experience and what I can actually do.</p>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Computer Science student at ECE Paris with a submajor in Cybersecurity &amp; Networks. I'm working toward a Junior Pentester or SOC Analyst role.</p>
+        <p>I learn by doing: I break machines on Hack The Box, run my own Active Directory and SOC labs, hunt bugs on HackerOne and build tools in Python. I also have a full-stack background (React, Next.js, TypeScript, Node.js), which helps me understand the web apps I test.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl"><div class="when">2024 – 2027</div><h4>Bachelor's in Computer Science, ECE Paris</h4><p>Submajor in Cybersecurity &amp; Networks.</p></div>
+        <div class="tl"><div class="when">Apr – Jul 2026</div><h4>IT Intern → Technician, United Sugar Company (Savola Group), Jeddah</h4><p>Promoted to Technician after one month. Cisco Meraki network supervision, SCCM/PXE/AD deployment across ~35 offices, Nexthink DEX analysis, an Excel/VBA stock-management app, and mentoring a junior intern.</p></div>
+        <div class="tl"><div class="when">Certification</div><h4>eJPT, eLearnSecurity Junior Penetration Tester</h4><p>Hands-on exam covering host and network recon, exploitation and pivoting.</p></div>
+      </div>
+    </div>
+
+    <h3 class="h3">What I can do</h3>
+    <div class="skillset">
+      <div class="card"><h3>Offensive Security</h3><ul>
+        <li>Enumerate and exploit Linux &amp; Windows hosts</li>
+        <li>Attack Active Directory (Kerberoasting, BloodHound paths)</li>
+        <li>Test web apps for OWASP Top 10 issues with Burp Suite</li>
+        <li>Pivot through networks and escalate privileges</li></ul></div>
+      <div class="card"><h3>Defensive / SOC</h3><ul>
+        <li>Deploy Wazuh with Sysmon telemetry</li>
+        <li>Write and tune detection rules</li>
+        <li>Automate alert triage and response with SOAR</li>
+        <li>Supervise networks with Cisco Meraki</li></ul></div>
+      <div class="card"><h3>Development</h3><ul>
+        <li>Python security tools (scanners, automation)</li>
+        <li>Full-stack apps: React, Next.js, TypeScript, Node.js</li>
+        <li>Bash scripting and Linux administration</li>
+        <li>Git, GitHub Actions, CI workflows</li></ul></div>
+    </div>
+
+    <h3 class="h3">Technologies used in real projects</h3>
+    <div class="chips">
+      <span class="chip">Nmap</span><span class="chip">Burp Suite</span><span class="chip">Metasploit</span><span class="chip">BloodHound</span>
+      <span class="chip">Impacket</span><span class="chip">Wazuh</span><span class="chip">Sysmon</span><span class="chip">Vultr</span>
+      <span class="chip">Cisco Meraki</span><span class="chip">SCCM</span><span class="chip">Active Directory</span>
+      <span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">Node.js</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. CONTACT ================= -->
+<section class="alt" id="contact">
+  <div class="wrap">
+    <h2 class="title">Get in <span>Touch</span></h2>
+    <p class="sub">Open to internships, junior pentest / SOC roles, collaborations and technical projects. Let's talk.</p>
+    <div class="contact-grid">
+      <div class="contact-links">
+        <a href="mailto:turkihufais@gmail.com">Email <span>turkihufais@gmail.com</span></a>
+        <a href="https://www.linkedin.com/in/turki-hufais/" target="_blank" rel="noopener">LinkedIn <span>Turki Hufais</span></a>
+        <a href="https://github.com/TurkiTheCreator" target="_blank" rel="noopener">GitHub <span>TurkiTheCreator</span></a>
+        <a href="https://hackerone.com/txu7t" target="_blank" rel="noopener">HackerOne <span>txu7t</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Turki Hufais · 0xgyro</footer>
+
+<script>
+/* ============ EDIT YOUR CONTENT HERE ============ */
+
+// Projects: add "demo" for a live link
+const SOC = "https://github.com/TurkiTheCreator/SOC-Automation-Lab/raw/main/assets/";
+const projects = [
+  {
+    name: "Tusk", featured: true,
+    summary: "Lightweight Python vulnerability scanner: port scanning, service fingerprinting, CPE generation and CVE correlation through the NVD API.",
+    tech: ["Python 3.11", "NVD API", "CVSS", "YAML rules", "Docker"],
+    github: "https://github.com/TurkiTheCreator/Tusk",
+    cover: "", screenshots: [],
+    architecture: "Staged pipeline: port discovery (IPv4/IPv6) → protocol-aware banner grabbing → YAML fingerprinting → NVD-correct CPE generation → CVE lookup with caching and rate limiting. Optional analyzers (HTTP security headers, TLS certificate) add evidence, then a rule engine evaluates everything once and produces a ScanResult for text, JSON or the Python library API. Plugins load through Python entry points.",
+    results: ["CVSS v4.0 / v3.1 / v3.0 / v2 scoring for correlated CVEs", "Rule engine with severity, remediation and version-comparison conditions", "CLI, JSON output, library API (from tusk import scan) and Dockerfile", "Clear exit codes for CI use (0 clean, 1 findings, 2/3 errors)"],
+    lessons: ["Designing a pluggable, staged scan pipeline", "Generating correct CPEs so NVD matching actually works", "Handling NVD rate limits with caching and retries"]
+  },
+  {
+    name: "SOC Automation Lab", featured: true,
+    summary: "End-to-end SOC pipeline: Sysmon telemetry to an analyst email and a TheHive case, with no manual triage.",
+    tech: ["Wazuh", "Sysmon", "Shuffle SOAR", "TheHive", "VirusTotal", "Vultr"],
+    github: "https://github.com/TurkiTheCreator/SOC-Automation-Lab",
+    cover: SOC + "architecture-diagram.png",
+    screenshots: ["architecture-diagram.png","wazuh-dashboard.png","shuffle-workflow.png","virustotal-enrichment.png","thehive-case.png","Email.png"].map(f => SOC + f),
+    architecture: "Windows 11 endpoint (Sysmon) → Wazuh agent (TLS) → Wazuh manager → webhook → Shuffle SOAR → VirusTotal hash lookup → TheHive case → analyst email. Wazuh and TheHive run on separate Vultr instances to mirror production segmentation.",
+    results: ["Custom Wazuh rule 100002 detects Mimikatz via Sysmon Event ID 1 (MITRE T1003)", "Automatic SHA256 enrichment with VirusTotal", "TheHive case and analyst email created with no manual triage"],
+    lessons: ["Writing custom rules from raw Sysmon fields", "Integrating REST APIs with different auth models (TheHive, VirusTotal, Elasticsearch)", "Building one end-to-end response workflow instead of isolated integrations"]
+  },
+  {
+    name: "GitScope", featured: true,
+    summary: "Visual dashboard that analyzes any GitHub user's public profile: languages, activity, a personality engine and side-by-side comparison.",
+    tech: ["React 18", "Vite", "Recharts", "GitHub REST & GraphQL", "SVG"],
+    github: "https://github.com/TurkiTheCreator/gitscope",
+    demo: "https://gitscope-rho.vercel.app",
+    cover: "", screenshots: [],
+    architecture: "Client-side React app calling the GitHub REST API directly (GraphQL with an optional token for the contribution heatmap). Charts are lazy-loaded Recharts plus hand-built SVG for the Commit Clock and Repo DNA radar.",
+    results: ["Five-archetype personality engine with a 90-day action plan", "Commit Clock, language timeline, Repo DNA fingerprint, project graveyard", "Shareable ?user= URLs, two-user comparison and PNG export"],
+    lessons: ["Working within GitHub API rate limits", "Custom SVG data visualization"]
+  },
+  {
+    name: "HarmBench LLM Evaluation",
+    summary: "Robustness evaluation of three LLMs against harmful, injected and copyright prompts with a 9-point scoring grid.",
+    tech: ["Python", "pandas", "Hugging Face", "Jupyter", "ELK"],
+    github: "https://github.com/TurkiTheCreator/harmbench-llm-evaluation",
+    cover: "", screenshots: [],
+    architecture: "70 custom prompts (standard, contextual prompt-injection, copyright) run against Llama-3.1-8B, Llama-3.3-70B and gpt-oss-120b through the Hugging Face router: 210 experiments scored on refusal, harmfulness, justification, politeness and jailbreak resistance. Optional Elasticsearch + Kibana for visualization.",
+    results: ["Llama-3.1-8B was the most robust (20% refusal, lowest harmfulness)", "gpt-oss-120b never refused", "Model size did not correlate with safer behavior; contextual injection got 0% refusals"],
+    lessons: ["Designing a reproducible evaluation grid", "Comparing HarmBench, HELM and AdvBench methodologies"]
+  }
+];
+
+// Write-ups: category = CTF | Research | Tutorial | Lab ; status = active | retired | public
+const writeups = [
+  { name:"CVE-2026-107803: ProcessMaker SQL Injection", category:"Research", platform:"ProcessMaker", os:"CWE-89", diff:"CVSS 6.5", status:"public", url:"writeups/processmaker-sqli.html" },
+  { name:"DutyBound", category:"CTF", platform:"HTB", os:"Linux", diff:"Medium/Hard", status:"active", url:"writeups/dutybound.html" },
+];
+
+/* ============ RENDERING (no need to edit) ============ */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function projectCard(p, i){
+  return `<div class="card">
+    ${p.cover ? `<div class="shot" style="background-image:url('${esc(p.cover)}')"></div>` : ''}
+    <h3>${esc(p.name)}</h3>
+    <p>${esc(p.summary)}</p>
+    <div class="tags">${p.tech.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+    <div class="row">
+      <button class="btn sm" onclick="openProject(${i})">Details</button>
+      <a class="btn dark sm" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>
+      ${p.demo ? `<a class="btn dark sm" href="${esc(p.demo)}" target="_blank" rel="noopener">Live Demo</a>` : ''}
+    </div></div>`;
+}
+document.getElementById('pgrid').innerHTML = projects.map(projectCard).join('');
+document.getElementById('featured').innerHTML = projects.map((p,i)=>p.featured?projectCard(p,i):'').join('');
+
+const pmodal = document.getElementById('pmodal');
+function openProject(i){
+  const p = projects[i], li = a => a.map(x=>`<li>${esc(x)}</li>`).join('');
+  document.getElementById('pbody').innerHTML = `
+    <button class="close" onclick="pmodal.close()">×</button>
+    <h2>${esc(p.name)}</h2><p>${esc(p.summary)}</p>
+    <h4>Technologies</h4><div class="tags">${p.tech.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+    <h4>Architecture</h4><p>${esc(p.architecture)}</p>
+    <h4>Results</h4><ul>${li(p.results)}</ul>
+    <h4>Lessons Learned</h4><ul>${li(p.lessons)}</ul>
+    ${p.screenshots.length?`<h4>Screenshots</h4><div class="gallery">${p.screenshots.map(s=>`<img src="${esc(s)}" alt="${esc(p.name)} screenshot" loading="lazy">`).join('')}</div>`:''}
+    <div class="row" style="margin-top:22px"><a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">View on GitHub</a>${p.demo?`<a class="btn dark" href="${esc(p.demo)}" target="_blank" rel="noopener">Live Demo</a>`:''}</div>`;
+  pmodal.showModal();
+}
+pmodal.addEventListener('click', e => { if(e.target===pmodal) pmodal.close(); });
+
+const wgrid = document.getElementById('wgrid');
+function renderW(f){
+  const list = writeups.filter(w => f==='all' || w.category===f || w.status===f);
+  wgrid.innerHTML = list.map(w => `
+    <a class="card" href="${esc(w.url)}">
+      <h3>${esc(w.name)}</h3>
+      <div class="meta mono">${esc(w.platform)} · ${esc(w.os)} · ${esc(w.diff)}</div>
+      <div class="tags">
+        <span class="tag">${esc(w.category)}</span>
+        <span class="tag ${w.status==='active'?'lock':'open'}">${w.status==='active'?'🔒 active':'✓ '+esc(w.status)}</span>
+      </div></a>`).join('') || '<p style="color:var(--muted)">Nothing here yet.</p>';
+}
+document.getElementById('filters').addEventListener('click', e => {
+  if(e.target.tagName!=='BUTTON') return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on'); renderW(e.target.dataset.f);
+});
+renderW('all');
+
+// Live HTB stats — htb.json is refreshed every few hours by GitHub Actions
+fetch('htb.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).then(d => {
+  if(!d || !d.rank) return;
+  const t = [`<span class="tag lock">${esc(d.rank)}</span>`];
+  if(d.global_rank)  t.push(`<span class="tag">#${esc(d.global_rank)} global</span>`);
+  if(d.country_rank) t.push(`<span class="tag">#${esc(d.country_rank)} ${esc(d.country||'')}</span>`);
+  if(d.points!=null) t.push(`<span class="tag">${esc(d.points)} pts</span>`);
+  if(d.user_owns!=null) t.push(`<span class="tag open">${esc(d.user_owns)} user · ${esc(d.system_owns)} root</span>`);
+  document.getElementById('htb-live').innerHTML = t.join('');
+  if(d.profile_url) document.getElementById('htb-card').href = d.profile_url;
+  document.getElementById('htb-badge')?.remove();  // live data loaded → hide fallback badge
+}).catch(()=>{});
+
+// Nav: solid on scroll + active link
+const hdr = document.getElementById('hdr'), links = document.querySelectorAll('.links a');
+addEventListener('scroll', () => {
+  hdr.classList.toggle('solid', scrollY > 40);
+  let cur = 'home';
+  ['home','projects','writeups','about','contact'].forEach(id => {
+    const el = document.getElementById(id); if(scrollY >= el.offsetTop - 140) cur = id;
+  });
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur));
+});
+links.forEach(a => a.onclick = () => nav.classList.remove('open'));
+fetch('assets/Turki_Hufais_CV.pdf',{method:'HEAD'}).then(r=>{ if(r.ok) document.getElementById('cv-btn').hidden=false; }).catch(()=>{});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
